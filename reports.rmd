@@ -1,0 +1,39 @@
+---
+title: "Report on Gun Murders"
+author: "Rafi Muhammad"
+date: "10/9/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+This is a report on 2010 gun murder rates obatain from FBI report
+
+First we are going to use the following library :
+```{r}
+library(tidyverse)
+```
+
+then, we load data we already wrangled :
+```{r}
+load("rda/murders.rda")
+```
+
+we start by generate summary of the data by using sumary() function. Here is the result :
+```{r murders}
+summary(murders)
+```
+
+## Murder rate by state
+
+We visualize murder by state data
+
+```{r plot_murders, echo=FALSE}
+murders %>% mutate(abb = reorder(abb, rate)) %>%
+  ggplot(aes(abb, rate)) +
+  geom_bar(width = 0.5, stat= "identity", color='black') +
+  coord_flip()
+```
